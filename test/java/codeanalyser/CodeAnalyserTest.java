@@ -19,4 +19,16 @@ public class CodeAnalyserTest {
         } catch (CodeAnalyserException e) { }
           catch (NullPointerException e){}
     }
+
+    @Test
+    public void givenIndiaCensusData_WithWrongFile_ShouldThrowException() {
+        try {
+            CodeAnalyser codeAnalyser = new CodeAnalyser();
+            ExpectedException exceptionRule = ExpectedException.none();
+            exceptionRule.expect(CodeAnalyserException.class);
+            codeAnalyser.loadIndiaCodeData(WRONG_CODE_CSV_FILE_PATH);
+        } catch (CodeAnalyserException e) {
+            Assert.assertEquals(CodeAnalyserException.ExceptionType.CODE_FILE_PROBLEM,e.type);
+        }
+    }
 }
